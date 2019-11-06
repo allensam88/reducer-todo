@@ -1,10 +1,9 @@
-import React, { useReducer } from 'react';
-import { initialState, reducer } from '../reducer/reducer';
-import Form from './Form';
+import React, { useContext } from 'react';
+import { TodoContext } from '../context/TodoContext';
 import Todo from './Todo';
 
 const List = () => {
-    const [todos, dispatch] = useReducer(reducer, initialState)
+    const { todos, dispatch } = useContext(TodoContext);
 
     const toggleCompleted = id => {
         dispatch({ type: 'TOGGLE_COMPLETE', payload: id })
@@ -16,13 +15,12 @@ const List = () => {
 
     return (
         <div className="todo-list">
-            <Form dispatch={dispatch}/>
-        {todos.map(item => (
-            <Todo
-            key={item.id}
-            item={item}
-            toggleCompleted={toggleCompleted}
-            />
+            {todos.map(item => (
+                <Todo
+                key={item.id}
+                item={item}
+                toggleCompleted={toggleCompleted}
+                />
         ))}
         <button className="clear-btn" onClick={clearItem}>
             Clear Item

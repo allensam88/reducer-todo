@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { TodoContext } from '../context/TodoContext';
 
-const Form = props => {
-  const [newItem, setNewItem] = useState('')
+const Form = () => {
+    const [newItem, setNewItem] = useState('')
+    const dispatch = useContext(TodoContext);
 
-  const handleChanges = e => {
-    setNewItem(e.target.value)
-  };
+    const handleChanges = e => {
+        setNewItem(e.target.value)
+    };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.dispatch({ type: 'ADD_ITEM', payload: newItem });
-    setNewItem('');
-  };
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch({ type: 'ADD_ITEM', payload: newItem });
+        setNewItem('');
+    };
 
     return (
         <form onSubmit={handleSubmit}>
-        <input
-            type="text"
-            name="item"
-            id="item"
-            placeholder='add an item'
-            value={newItem}
-            onChange={handleChanges}
-            autoComplete='off'
-        />
-        <button>Add</button>
+            <input
+                type="text"
+                name="item"
+                id="item"
+                placeholder='add an item'
+                value={newItem}
+                onChange={handleChanges}
+                autoComplete='off'
+            />
+            <button>Add</button>
         </form>
     );
 }
