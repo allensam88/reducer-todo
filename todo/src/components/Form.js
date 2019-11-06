@@ -9,12 +9,7 @@ const Form = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newTask = {
-      task: newItem,
-      completed: false,
-      id: Date.now()
-    };
-    props.dispatch({ type: 'ADD_ITEM', payload: newTask });
+    props.dispatch({ type: 'ADD_ITEM', payload: newItem });
     setNewItem('');
   };
 
